@@ -8,7 +8,55 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  gtag('js', new Date());class TrieNode:
+
+    def __init__(self):
+        self.children = {}
+        self.end_of_word = False
+
+class WordDictionary:
+
+    def __init__(self):
+        self.root = TrieNode()
+
+    def addWord(self, word: str) -> None:
+        curr = self.root
+
+        for ch in word:
+            if ch not in curr.children:
+                curr.children[ch] = TrieNode()
+            curr = curr.children[ch]
+        
+        curr.end_of_word = True
+
+    def search(self, word: str) -> bool:
+        
+        def dfs(index, node):
+            if index == len(word):
+                return node.end_of_word
+            
+            ch = word[index]
+
+            if ch == '.':
+                for child in node.children.values():
+                    if dfs(index+1, child):
+                        return True
+                    return False
+            else:
+                if ch not in node.children:
+                    return False
+
+                node = node.children[ch]
+
+                return dfs(index+1, node)
+        
+        return dfs(0, self.root)
+
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)
   gtag('config', 'G-521QKFPXHL');
 </script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2314171F'/%3E%3Ctext x='32' y='41' font-family='Georgia,serif' font-size='23' font-weight='600' fill='%23C9A227' text-anchor='middle'%3EUS%3C/text%3E%3C/svg%3E">
@@ -392,8 +440,8 @@
             <div class="bar-sub">look at my library for more deets!</div>
           </div>
         </div>
-        <div class="bar-track"><div class="bar-fill" data-target="96"></div></div>
-        <div class="bar-pct">96%</div>
+        <div class="bar-track"><div class="bar-fill" data-target="100"></div></div>
+        <div class="bar-pct">100%</div>
       </div>
     </div>
   </div>
